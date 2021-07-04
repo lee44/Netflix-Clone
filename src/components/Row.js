@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../utils/axios";
 import "../css/Row.css";
-import ScrollContainer from "react-indiana-drag-scroll";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 
@@ -24,8 +23,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
     },
   };
   const movieClicked = (moviename) => {
-    console.log(moviename);
-    if (trailerUrl != "") setTrailerUrl("");
+    if (trailerUrl) setTrailerUrl("");
     else {
       movieTrailer(moviename)
         .then((url) => {
@@ -38,7 +36,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
   return (
     <div className="row">
       <h2>{title}</h2>
-      <ScrollContainer className="row__posters">
+      <div className="row__posters">
         {movies.map((movie) => (
           <img
             onClick={() =>
@@ -52,8 +50,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
             alt={movie.name}
           />
         ))}
-      </ScrollContainer>
-      {trailerUrl != "" && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
+      </div>
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
     </div>
   );
 }
