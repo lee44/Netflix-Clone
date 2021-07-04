@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  original: null,
   trending: null,
   top_rated: null,
   action: null,
@@ -16,7 +15,6 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     setMovies: (state, action) => {
-      state.original = action.payload.original;
       state.trending = action.payload.trending;
       state.top_rated = action.payload.top_rated;
       state.action = action.payload.top_rated;
@@ -31,7 +29,6 @@ const movieSlice = createSlice({
 //setMovies is an action creator
 export const { setMovies } = movieSlice.actions;
 
-export const selectOriginal = (state) => state.movie.original;
 export const selectTrending = (state) => state.movie.trending;
 export const selectTopRated = (state) => state.movie.top_rated;
 export const selectAction = (state) => state.movie.action;
