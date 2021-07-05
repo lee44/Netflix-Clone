@@ -2,16 +2,67 @@ import React, { useState, useEffect } from "react";
 import "../css/Row.css";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import requests from "../utils/requests";
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectTrending, fetchMovies } from "../redux/movieSlice";
+import {
+  fetchMovies,
+  selectTrending,
+  selectTopRated,
+  selectAction,
+  selectComedy,
+  selectHorror,
+  selectRomance,
+  selectDocumentary,
+  selectTrendingStatus,
+  selectTopRatedStatus,
+  selectActionStatus,
+  selectComedyStatus,
+  selectHorrorStatus,
+  selectRomanceStatus,
+  selectDocumentaryStatus,
+} from "../redux/movieSlice";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ title, fetchUrl, isLargeRow }) {
   const dispatch = useDispatch();
-  const movies = useSelector(selectTrending);
-  const moviesStatus = useSelector((state) => state.movie.trending.status);
   const [trailerUrl, setTrailerUrl] = useState("");
+
+  const movies = getSelector(title);
+
+  function getSelector(title) {
+    switch (title) {
+      case "Trending":
+        return useSelector(selectTrending);
+      case "Top Rated":
+        return useSelector(selectTopRated);
+      case "Action":
+        return useSelector(selectAction);
+      case "Comedy":
+        return useSelector(selectComedy);
+      case "Horror":
+        return useSelector(selectHorror);
+      case "Documentary":
+        return useSelector(selectDocumentary);
+    }
+  }
+  const moviesStatus = getSelectorStatus(title);
+  function getSelectorStatus(title) {
+    switch (title) {
+      case "Trending":
+        return useSelector(selectTrendingStatus);
+      case "Top Rated":
+        return useSelector(selectTopRatedStatus);
+      case "Action":
+        return useSelector(selectActionStatus);
+      case "Comedy":
+        return useSelector(selectComedyStatus);
+      case "Horror":
+        return useSelector(selectHorrorStatus);
+      case "Documentary":
+        return useSelector(selectDocumentaryStatus);
+    }
+  }
 
   useEffect(() => {
     dispatch(fetchMovies(fetchUrl));
