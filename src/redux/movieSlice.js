@@ -1,40 +1,68 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../utils/axios";
+import requests from "../utils/requests";
 
 const initialState = {
-  trending: null,
-  top_rated: null,
-  action: null,
-  comedy: null,
-  horror: null,
-  romance: null,
-  documentary: null,
+  trending: { movies: null, status: "idle" },
+  top_rated: { movies: null, status: "idle" },
+  action: { movies: null, status: "idle" },
+  comedy: { movies: null, status: "idle" },
+  horror: { movies: null, status: "idle" },
+  romance: { movies: null, status: "idle" },
+  documentary: { movies: null, status: "idle" },
 };
+
+export const fetchMovies = createAsyncThunk(
+  "movies/fetchMovies",
+  async (fetchUrl) => {
+    const response = await axios.get(fetchUrl);
+    return response.data.results;
+  }
+);
 
 const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    setMovies: (state, action) => {
+    setTrending: (state, action) => {
       state.trending = action.payload.trending;
-      state.top_rated = action.payload.top_rated;
-      state.action = action.payload.top_rated;
-      state.comedy = action.payload.comedy;
-      state.horror = action.payload.horror;
-      state.romance = action.payload.romance;
-      state.documentary = action.payload.documentary;
+    },
+  },
+  extraReducers: {
+    [fetchMovies.pending]: (state, action) => {
+      for (const property in requests) {
+        if (requests[property] === action.meta.arg) {
+          state[property].status = "pending";
+        }
+      }
+    },
+    [fetchMovies.fulfilled]: (state, action) => {
+      for (const property in requests) {
+        if (requests[property] === action.meta.arg) {
+          state[property].status = "succeeded";
+          state[property].movies = action.payload;
+        }
+      }
+    },
+    [fetchMovies.rejected]: (state, action) => {
+      for (const property in requests) {
+        if (requests[property] === action.meta.arg) {
+          state[property].status = "failed";
+        }
+      }
     },
   },
 });
 
 //setMovies is an action creator
-export const { setMovies } = movieSlice.actions;
+export const { setTrending } = movieSlice.actions;
 
-export const selectTrending = (state) => state.movie.trending;
-export const selectTopRated = (state) => state.movie.top_rated;
-export const selectAction = (state) => state.movie.action;
-export const selectComedy = (state) => state.movie.comedy;
-export const selecthorror = (state) => state.movie.horror;
-export const selectromance = (state) => state.movie.romance;
-export const selectdocumentary = (state) => state.movie.documentary;
+export const selectTrending = (state) => state.movie.trending.movies;
+export const selectTopRated = (state) => state.movie.top_rated.movies;
+export const selectAction = (state) => state.movie.action.movies;
+export const selectComedy = (state) => state.movie.comedy.movies;
+export const selecthorror = (state) => state.movie.horror.movies;
+export const selectromance = (state) => state.movie.romance.movies;
+export const selectdocumentary = (state) => state.movie.documentary.movies;
 
 export default movieSlice.reducer;
