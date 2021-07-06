@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies, selectAll } from "../redux/movieSlice";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
-function Row({ category, fetchUrl, isLargeRow }) {
+function Row({ category, fetchUrl }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
 
@@ -46,21 +46,22 @@ function Row({ category, fetchUrl, isLargeRow }) {
       </div>
     );
   } else if (moviesStatus === "succeeded") {
-    {
-      content = movies.map((movie) => (
-        <img
-          onClick={() =>
-            movieClicked(movie.name || movie.title || movie.orginal_name)
-          }
-          key={movie.id}
-          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
-          src={`${base_url}${
-            isLargeRow ? movie.poster_path : movie.backdrop_path
-          }`}
-          alt={movie.name}
-        />
-      ));
-    }
+    content = movies.map((movie) => (
+      <img
+        onClick={() =>
+          movieClicked(
+            movie.name ||
+              movie.title ||
+              movie.orginal_name ||
+              movie.orignal_title
+          )
+        }
+        key={movie.id}
+        className="row__poster"
+        src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
+        alt={movie.name}
+      />
+    ));
   } else if (moviesStatus === "failed") {
     content = <div>Error</div>;
   }

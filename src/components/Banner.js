@@ -24,7 +24,9 @@ function Banner() {
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url('${base_url}${movie?.backdrop_path}')`,
+        backgroundImage: `url('${
+          movie.backdrop_path ? base_url + movie.backdrop_path : ""
+        }')`,
         backgroundPosition: "top center",
       }}
     >
