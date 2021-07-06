@@ -17,10 +17,11 @@ function Nav() {
   return (
     <nav className={`${navbarBlack && "nav__black"}`}>
       <div className="nav__contents">
-        <img className="nav__logo" src={logo} />
+        <img className="nav__logo" src={logo} alt="netflix_logo" />
         <img
           className="nav__avatar"
           src="https://pbs.twimg.com/profile_images/1240119990411550720/hBEe3tdn_400x400.png"
+          alt="avatar"
         />
       </div>
     </nav>

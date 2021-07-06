@@ -4,62 +4,16 @@ import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  fetchMovies,
-  selectTrending,
-  selectTopRated,
-  selectAction,
-  selectComedy,
-  selectHorror,
-  selectRomance,
-  selectDocumentary,
-  selectTrendingStatus,
-  selectTopRatedStatus,
-  selectActionStatus,
-  selectComedyStatus,
-  selectHorrorStatus,
-  selectRomanceStatus,
-  selectDocumentaryStatus,
-} from "../redux/movieSlice";
+import { fetchMovies, selectAll } from "../redux/movieSlice";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
-function Row({ title, fetchUrl, isLargeRow }) {
+function Row({ category, fetchUrl, isLargeRow }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
 
-  let selector, selectorStatus;
-  switch (title) {
-    case "Trending":
-      selector = selectTrending;
-      selectorStatus = selectTrendingStatus;
-      break;
-    case "Top Rated":
-      selector = selectTopRated;
-      selectorStatus = selectTopRatedStatus;
-      break;
-    case "Action":
-      selector = selectAction;
-      selectorStatus = selectActionStatus;
-      break;
-    case "Comedy":
-      selector = selectComedy;
-      selectorStatus = selectComedyStatus;
-      break;
-    case "Horror":
-      selector = selectHorror;
-      selectorStatus = selectHorrorStatus;
-      break;
-    case "Romance":
-      selector = selectRomance;
-      selectorStatus = selectRomanceStatus;
-      break;
-    case "Documentary":
-      selector = selectDocumentary;
-      selectorStatus = selectDocumentaryStatus;
-      break;
-  }
-  const movies = useSelector(selector);
-  const moviesStatus = useSelector(selectorStatus);
+  const allMovies = useSelector(selectAll);
+  const movies = allMovies[category].movies;
+  const moviesStatus = allMovies[category].status;
 
   useEffect(() => {
     dispatch(fetchMovies(fetchUrl));
@@ -112,7 +66,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
   }
   return (
     <div className="row">
-      <h2>{title}</h2>
+      <h2>{category.toUpperCase()}</h2>
       <div className="row__posters">{content}</div>
       {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
     </div>
