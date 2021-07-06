@@ -3,6 +3,7 @@ import axios from "../utils/axios";
 import requests from "../utils/requests";
 
 const initialState = {
+  originals: { movies: null, status: "idle" },
   trending: { movies: null, status: "idle" },
   top_rated: { movies: null, status: "idle" },
   action: { movies: null, status: "idle" },
@@ -58,5 +59,6 @@ const movieSlice = createSlice({
 export const { setTrending } = movieSlice.actions;
 
 export const selectAll = (state) => state.movie;
+export const selectOriginals = (state) => state.movie.originals;
 
 export default movieSlice.reducer;

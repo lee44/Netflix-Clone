@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="app">
       <Nav />
-      <Banner />
+      <Banner category={category.originals} fetchUrl={requests.originals} />
       {/* <Row
         isLargeRow
         title="Netflix Originals"
