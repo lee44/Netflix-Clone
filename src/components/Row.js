@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../css/Row.css";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
-import requests from "../utils/requests";
-
+import ClipLoader from "react-spinners/ClipLoader";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchMovies,
@@ -28,41 +27,39 @@ function Row({ title, fetchUrl, isLargeRow }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
 
-  const movies = getSelector(title);
-
-  function getSelector(title) {
-    switch (title) {
-      case "Trending":
-        return useSelector(selectTrending);
-      case "Top Rated":
-        return useSelector(selectTopRated);
-      case "Action":
-        return useSelector(selectAction);
-      case "Comedy":
-        return useSelector(selectComedy);
-      case "Horror":
-        return useSelector(selectHorror);
-      case "Documentary":
-        return useSelector(selectDocumentary);
-    }
+  let selector, selectorStatus;
+  switch (title) {
+    case "Trending":
+      selector = selectTrending;
+      selectorStatus = selectTrendingStatus;
+      break;
+    case "Top Rated":
+      selector = selectTopRated;
+      selectorStatus = selectTopRatedStatus;
+      break;
+    case "Action":
+      selector = selectAction;
+      selectorStatus = selectActionStatus;
+      break;
+    case "Comedy":
+      selector = selectComedy;
+      selectorStatus = selectComedyStatus;
+      break;
+    case "Horror":
+      selector = selectHorror;
+      selectorStatus = selectHorrorStatus;
+      break;
+    case "Romance":
+      selector = selectRomance;
+      selectorStatus = selectRomanceStatus;
+      break;
+    case "Documentary":
+      selector = selectDocumentary;
+      selectorStatus = selectDocumentaryStatus;
+      break;
   }
-  const moviesStatus = getSelectorStatus(title);
-  function getSelectorStatus(title) {
-    switch (title) {
-      case "Trending":
-        return useSelector(selectTrendingStatus);
-      case "Top Rated":
-        return useSelector(selectTopRatedStatus);
-      case "Action":
-        return useSelector(selectActionStatus);
-      case "Comedy":
-        return useSelector(selectComedyStatus);
-      case "Horror":
-        return useSelector(selectHorrorStatus);
-      case "Documentary":
-        return useSelector(selectDocumentaryStatus);
-    }
-  }
+  const movies = useSelector(selector);
+  const moviesStatus = useSelector(selectorStatus);
 
   useEffect(() => {
     dispatch(fetchMovies(fetchUrl));
@@ -88,8 +85,12 @@ function Row({ title, fetchUrl, isLargeRow }) {
   };
 
   let content;
-  if (moviesStatus === "loading") {
-    content = <div className="loader">Loading...</div>;
+  if (moviesStatus === "pending") {
+    content = (
+      <div className="clipLoaderContainer">
+        <ClipLoader color="#FF0000" loading={true} size={150} />
+      </div>
+    );
   } else if (moviesStatus === "succeeded") {
     {
       content = movies.map((movie) => (
