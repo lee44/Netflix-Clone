@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../css/Row.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies, selectAll } from "../redux/movieSlice";
@@ -13,7 +13,8 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
-
+  const [movieExplorer, setMovieExplorer] = useState(false);
+  const container = useRef(null);
   const movies = useSelector(selectorMovie);
   const moviesStatus = useSelector(selectorStatus);
 
@@ -49,6 +50,17 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
     }
   };
 
+  const handleMovieExplorer = (e, state) => {
+    if (state) {
+      setMovieExplorer(state);
+      const cardRect = e.target.getBoundingClientRect();
+      const explorer = container.current;
+      explorer.style.left = `${cardRect.left - 35}px`;
+    } else {
+      setMovieExplorer(false);
+    }
+  };
+
   let content;
   if (moviesStatus === "pending") {
     content = (
@@ -58,7 +70,7 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
     );
   } else if (moviesStatus === "succeeded") {
     content = movies.map((movie) => (
-      <div style={{ outline: "none" }}>
+      <div>
         <img
           onClick={() =>
             movieClicked(
@@ -68,8 +80,8 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
                 movie.orignal_title
             )
           }
-          onMouseOver={() => {
-            // console.log("Mouse over card");
+          onMouseOver={(e) => {
+            handleMovieExplorer(e, true);
           }}
           key={movie.id}
           className="card"
@@ -84,12 +96,27 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
   return (
     <div className="row">
       <h2 style={{ marginBottom: "1rem" }}>{category.toUpperCase()}</h2>
-      {moviesStatus === "succeeded" ? (
-        <Slider {...settings}>{content}</Slider>
-      ) : (
-        content
-      )}
-      {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
+      <div className="row-container">
+        {moviesStatus === "succeeded" ? (
+          <Slider {...settings}>{content}</Slider>
+        ) : (
+          content
+        )}
+        {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
+        <div
+          className={`${movieExplorer ? "show explorer" : "explorer"}`}
+          ref={container}
+          onMouseOut={(e) => {
+            handleMovieExplorer(e, false);
+          }}
+        >
+          <img
+            className="cardExplorer"
+            src="https://image.tmdb.org/t/p/original//nVKRspU9SQEs2gNrms8cDKsI4vx.jpg"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
   );
 }
