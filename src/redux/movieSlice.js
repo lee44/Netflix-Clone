@@ -59,6 +59,23 @@ const movieSlice = createSlice({
 export const { setTrending } = movieSlice.actions;
 
 export const selectAll = (state) => state.movie;
-export const selectOriginals = (state) => state.movie.originals;
+export const selectOriginals = (state) => state.movie.originals.movies;
+export const selectTrending = (state) => state.movie.trending.movies;
+export const selectTopRated = (state) => state.movie.top_rated.movies;
+export const selectAction = (state) => state.movie.action.movies;
+export const selectComedy = (state) => state.movie.comedy.movies;
+export const selectHorror = (state) => state.movie.horror.movies;
+export const selectRomance = (state) => state.movie.romance.movies;
+export const selectDocumentary = (state) => state.movie.documentary.movies;
+
+export const selectOriginalStatus = (state) => state.movie.originals.status;
+export const selectTrendingStatus = (state) => state.movie.trending.status;
+export const selectTopRatedStatus = (state) => state.movie.top_rated.status;
+export const selectActionStatus = (state) => state.movie.action.status;
+export const selectComedyStatus = (state) => state.movie.comedy.status;
+export const selectHorrorStatus = (state) => state.movie.horror.status;
+export const selectRomanceStatus = (state) => state.movie.romance.status;
+export const selectDocumentaryStatus = (state) =>
+  state.movie.documentary.status;
 
 export default movieSlice.reducer;

@@ -6,23 +6,24 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Banner({ category, fetchUrl }) {
+function Banner({ category, fetchUrl, selectorMovie, selectorStatus }) {
   const dispatch = useDispatch();
-  const originals = useSelector(selectOriginals);
+  const movies = useSelector(selectorMovie);
+  const status = useSelector(selectorStatus);
 
   useEffect(() => {
     dispatch(fetchMovies(fetchUrl));
   }, [dispatch, fetchUrl]);
 
   let content;
-  if (originals.status === "pending") {
+  if (status === "pending") {
     content = (
       <div className="clipLoaderContainer">
         <ClipLoader color="#FF0000" loading={true} size={150} />
       </div>
     );
-  } else if (originals.status === "succeeded") {
-    const movie = originals.movies[Math.floor(Math.random() * 19)];
+  } else if (status === "succeeded") {
+    const movie = movies[Math.floor(Math.random() * 19)];
     content = (
       <header
         className="banner"
@@ -47,7 +48,7 @@ function Banner({ category, fetchUrl }) {
         <div className="banner--fadeBottom" />
       </header>
     );
-  } else if (originals.status === "failed") {
+  } else if (status === "failed") {
     content = <div>Error</div>;
   }
   return <div>{content}</div>;

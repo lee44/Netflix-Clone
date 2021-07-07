@@ -10,13 +10,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
-function Row({ category, fetchUrl }) {
+function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
 
-  const allMovies = useSelector(selectAll);
-  const movies = allMovies[category].movies;
-  const moviesStatus = allMovies[category].status;
+  const movies = useSelector(selectorMovie);
+  const moviesStatus = useSelector(selectorStatus);
 
   useEffect(() => {
     dispatch(fetchMovies(fetchUrl));
@@ -59,7 +58,7 @@ function Row({ category, fetchUrl }) {
     );
   } else if (moviesStatus === "succeeded") {
     content = movies.map((movie) => (
-      <div>
+      <div style={{ outline: "none" }}>
         <img
           onClick={() =>
             movieClicked(
@@ -69,6 +68,9 @@ function Row({ category, fetchUrl }) {
                 movie.orignal_title
             )
           }
+          onMouseOver={() => {
+            // console.log("Mouse over card");
+          }}
           key={movie.id}
           className="card"
           src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
@@ -81,8 +83,12 @@ function Row({ category, fetchUrl }) {
   }
   return (
     <div className="row">
-      <h2>{category.toUpperCase()}</h2>
-      <Slider {...settings}>{content}</Slider>
+      <h2 style={{ marginBottom: "1rem" }}>{category.toUpperCase()}</h2>
+      {moviesStatus === "succeeded" ? (
+        <Slider {...settings}>{content}</Slider>
+      ) : (
+        content
+      )}
       {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
     </div>
   );
