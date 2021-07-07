@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../css/Row.css";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMovies, selectAll } from "../redux/movieSlice";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchMovies, selectAll } from "../redux/movieSlice";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ category, fetchUrl }) {
@@ -26,6 +29,15 @@ function Row({ category, fetchUrl }) {
       autoplay: 1,
     },
   };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 750,
+    slidesToShow: 6,
+    slidesToScroll: 6,
+  };
+
   const movieClicked = (moviename) => {
     if (trailerUrl) setTrailerUrl("");
     else {
@@ -47,20 +59,22 @@ function Row({ category, fetchUrl }) {
     );
   } else if (moviesStatus === "succeeded") {
     content = movies.map((movie) => (
-      <img
-        onClick={() =>
-          movieClicked(
-            movie.name ||
-              movie.title ||
-              movie.orginal_name ||
-              movie.orignal_title
-          )
-        }
-        key={movie.id}
-        className="row__poster"
-        src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
-        alt={movie.name}
-      />
+      <div>
+        <img
+          onClick={() =>
+            movieClicked(
+              movie.name ||
+                movie.title ||
+                movie.orginal_name ||
+                movie.orignal_title
+            )
+          }
+          key={movie.id}
+          className="card"
+          src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
+          alt={movie.name}
+        />
+      </div>
     ));
   } else if (moviesStatus === "failed") {
     content = <div>Error</div>;
@@ -68,7 +82,7 @@ function Row({ category, fetchUrl }) {
   return (
     <div className="row">
       <h2>{category.toUpperCase()}</h2>
-      <div className="row__posters">{content}</div>
+      <Slider {...settings}>{content}</Slider>
       {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
     </div>
   );

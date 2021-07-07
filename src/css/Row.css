@@ -1,41 +1,38 @@
-.row {
-  margin: 3vw 0 3vw 20px;
-  color: white;
-}
-.scrollContainer {
-  width: 50%;
-}
-.row__posters {
-  display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  padding: 10px 0;
-}
-.row__posters::-webkit-scrollbar {
-  display: none;
-}
-.row__poster {
-  object-fit: contain;
-  width: 100%;
-  max-height: 125px;
-  transition: transform 450ms;
-  margin-right: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.row__poster:hover {
-  transform: scale(1.1);
-}
-
-.row__posterLarge {
-  max-height: 250px;
-}
-.row__posterLarge:hover {
-  transform: scale(1.09);
-}
-
 .clipLoaderContainer {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.row {
+  margin: 3vw 35px 3vw 35px;
+  color: white;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  object-fit: contain;
+  width: 300px;
+  height: 170px;
+  transition: transform 450ms;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.card:hover {
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 25px !important;
+}
+
+.slick-prev {
+  transform: translate(-25%, -50%) !important;
+}
+
+.slick-next {
 }
