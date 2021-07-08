@@ -8,13 +8,21 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {
+  FaPlay,
+  FaPlus,
+  FaThumbsUp,
+  FaThumbsDown,
+  FaChevronDown,
+} from "react-icons/fa";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
   const [movieExplorer, setMovieExplorer] = useState(false);
-  const container = useRef(null);
+  const containerRef = useRef(null);
+  const imageRef = useRef(null);
   const movies = useSelector(selectorMovie);
   const moviesStatus = useSelector(selectorStatus);
 
@@ -50,12 +58,15 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
     }
   };
 
-  const handleMovieExplorer = (e, state) => {
+  const handleMovieExplorer = (e, state, movie) => {
     if (state) {
       setMovieExplorer(state);
       const cardRect = e.target.getBoundingClientRect();
-      const explorer = container.current;
-      explorer.style.left = `${cardRect.left - 35}px`;
+      const explorerContainer = containerRef.current;
+      const imageContainer = imageRef.current;
+
+      explorerContainer.style.left = `${cardRect.left - 35}px`;
+      imageContainer.src = base_url + movie.backdrop_path;
     } else {
       setMovieExplorer(false);
     }
@@ -81,7 +92,7 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
             )
           }
           onMouseOver={(e) => {
-            handleMovieExplorer(e, true);
+            handleMovieExplorer(e, true, movie);
           }}
           key={movie.id}
           className="card"
@@ -104,17 +115,37 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
         )}
         {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
         <div
-          className={`${movieExplorer ? "show explorer" : "explorer"}`}
-          ref={container}
+          className={`${
+            movieExplorer ? "show explorer-container" : "explorer-container"
+          }`}
+          ref={containerRef}
           onMouseOut={(e) => {
             handleMovieExplorer(e, false);
           }}
         >
-          <img
-            className="cardExplorer"
-            src="https://image.tmdb.org/t/p/original//nVKRspU9SQEs2gNrms8cDKsI4vx.jpg"
-            alt=""
-          />
+          <img className="cardExplorer" src="" alt="" ref={imageRef} />
+          <div className="footer">
+            <div className="button-container">
+              <div className="buttonGroup1">
+                <FaPlay className="icons"></FaPlay>
+                <FaPlus className="icons"></FaPlus>
+                <FaThumbsUp className="icons"></FaThumbsUp>
+                <FaThumbsDown className="icons"></FaThumbsDown>
+              </div>
+              <div className="buttonGroup2">
+                <FaChevronDown className="icons"></FaChevronDown>
+              </div>
+            </div>
+            <div className="description">
+              <span>98% Match</span>
+              <span>TV-14</span>
+              <span>5 Seasons</span>
+              <span>HD</span>
+            </div>
+            <div className="genre">
+              <span>Horror</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -32,29 +32,54 @@
   cursor: pointer;
 }
 
-.explorer {
+.explorer-container {
+  top: 0;
   position: absolute;
   display: none;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  top: 0;
-  transition: transform 450ms;
-}
-
-.explorer:hover {
-  transform: scale(1.25, 1.5);
-}
-
-.cardExplorer {
-  object-fit: contain;
-  width: 300px;
-  height: 170px;
   border-radius: 5px;
-  z-index: 100;
+  transition: transform 450ms;
+  background-color: #313131;
+  z-index: 99;
+}
+
+.explorer-container:hover {
+  transform: scale(1.25, 1.3);
 }
 
 .show {
   display: flex;
+}
+
+.cardExplorer {
+  object-fit: fill;
+  width: 300px;
+  height: 170px;
+}
+
+.footer {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  box-sizing: border-box;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.icons {
+  font-size: 20px;
+  margin-right: 0.5rem;
+}
+
+.description > span {
+  margin-right: 0.5rem;
 }
 
 .slick-prev:before,
@@ -66,5 +91,6 @@
   transform: translate(-25%, -50%) !important;
 }
 
-.slick-next {
+.slick-arrow {
+  z-index: 100 !important;
 }
