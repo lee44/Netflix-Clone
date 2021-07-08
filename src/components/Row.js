@@ -119,7 +119,7 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
             movieExplorer ? "show explorer-container" : "explorer-container"
           }`}
           ref={containerRef}
-          onMouseOut={(e) => {
+          onMouseLeave={(e) => {
             handleMovieExplorer(e, false);
           }}
         >

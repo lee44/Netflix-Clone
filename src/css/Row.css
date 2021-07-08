@@ -43,6 +43,7 @@
   transition: transform 450ms;
   background-color: #313131;
   z-index: 99;
+  box-sizing: border-box;
 }
 
 .explorer-container:hover {
@@ -79,7 +80,7 @@
 }
 
 .description > span {
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 .slick-prev:before,
@@ -93,4 +94,18 @@
 
 .slick-arrow {
   z-index: 100 !important;
+}
+.slick-dots {
+  top: -35px;
+  bottom: auto !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: white !important;
+  opacity: 0.75;
+}
+
+.slick-dots li button:before {
+  font-size: 8px !important;
+  color: white !important;
 }
