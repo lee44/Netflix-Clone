@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../css/Row.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies, selectAll } from "../redux/movieSlice";
 import YouTube from "react-youtube";
@@ -8,6 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "../css/Row.css";
 import {
   FaPlay,
   FaPlus,
