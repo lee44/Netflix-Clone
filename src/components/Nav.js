@@ -49,6 +49,7 @@ function Nav() {
           <ul>
             <li>
               <a
+                style={{ fontWeight: "bold" }}
                 href="/#"
                 onClick={handleClicked}
                 ref={(el) => (navbarRef.current["home"] = el)}
