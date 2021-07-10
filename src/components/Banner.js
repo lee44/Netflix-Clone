@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../css/Banner.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMovies, selectOriginals } from "../redux/movieSlice";
+import { fetchMovies } from "../redux/movieSlice";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const base_url = "https://image.tmdb.org/t/p/original/";

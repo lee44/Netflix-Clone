@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMovies, selectAll } from "../redux/movieSlice";
+import { fetchMovies } from "../redux/movieSlice";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -80,27 +80,28 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
       </div>
     );
   } else if (moviesStatus === "succeeded") {
-    content = movies.map((movie) => (
-      <div>
-        <img
-          onClick={() =>
-            movieClicked(
-              movie.name ||
-                movie.title ||
-                movie.orginal_name ||
-                movie.orignal_title
-            )
-          }
-          onMouseOver={(e) => {
-            handleMovieExplorer(e, true, movie);
-          }}
-          key={movie.id}
-          className="card"
-          src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
-          alt={movie.name}
-        />
-      </div>
-    ));
+    content = movies.map((movie) => {
+      return (
+        <div key={movie.id}>
+          <img
+            onClick={() =>
+              movieClicked(
+                movie.name ||
+                  movie.title ||
+                  movie.orginal_name ||
+                  movie.orignal_title
+              )
+            }
+            onMouseOver={(e) => {
+              handleMovieExplorer(e, true, movie);
+            }}
+            className="card"
+            src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
+            alt={movie.name}
+          />
+        </div>
+      );
+    });
   } else if (moviesStatus === "failed") {
     content = <div>Error</div>;
   }

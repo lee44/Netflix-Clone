@@ -8,7 +8,6 @@ import Nav from "./components/Nav";
 import {
   selectOriginals,
   selectTrending,
-  selectTopRated,
   selectAction,
   selectComedy,
   selectHorror,
@@ -16,7 +15,6 @@ import {
   selectDocumentary,
   selectOriginalStatus,
   selectTrendingStatus,
-  selectTopRatedStatus,
   selectActionStatus,
   selectComedyStatus,
   selectHorrorStatus,
