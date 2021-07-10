@@ -8,12 +8,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/Row.css";
+import styled from "styled-components";
 import {
   FaPlay,
   FaPlus,
   FaThumbsUp,
   FaThumbsDown,
   FaChevronDown,
+  FaGrinTongueWink,
 } from "react-icons/fa";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
@@ -117,7 +119,7 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
         {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
         <div
           className={`${
-            movieExplorer ? "show explorer-container" : "explorer-container"
+            movieExplorer ? "show explorer-container" : " explorer-container"
           }`}
           ref={containerRef}
           onMouseLeave={(e) => {
@@ -127,14 +129,33 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
           <img className="cardExplorer" src="" alt="" ref={imageRef} />
           <div className="footer">
             <div className="button-container">
-              <div className="buttonGroup1">
-                <FaPlay className="icons"></FaPlay>
-                <FaPlus className="icons"></FaPlus>
-                <FaThumbsUp className="icons"></FaThumbsUp>
-                <FaThumbsDown className="icons"></FaThumbsDown>
+              <div className="icon-container">
+                <span className="icon-circle">
+                  <FaPlay className="icons"></FaPlay>
+                </span>
               </div>
-              <div className="buttonGroup2">
-                <FaChevronDown className="icons"></FaChevronDown>
+              <div className="icon-container">
+                <span className="icon-circle">
+                  <FaPlus className="icons"></FaPlus>
+                </span>
+              </div>
+              <div className="icon-container">
+                <span className="icon-circle">
+                  <FaThumbsUp className="icons"></FaThumbsUp>
+                </span>
+              </div>
+              <div className="icon-container">
+                <span className="icon-circle">
+                  <FaThumbsDown className="icons"></FaThumbsDown>
+                </span>
+              </div>
+              <div
+                className="icon-container"
+                style={{ flexGrow: "1", textAlign: "end" }}
+              >
+                <span className="icon-circle right">
+                  <FaChevronDown className="icons"></FaChevronDown>
+                </span>
               </div>
             </div>
             <div className="description">

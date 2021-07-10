@@ -41,8 +41,8 @@
   justify-content: center;
   border-radius: 5px;
   transition: transform 450ms;
-  background-color: #313131;
-  transform: scale(1, 1);
+  background-color: #1f1f1f;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 99;
 }
 
@@ -58,6 +58,7 @@
   object-fit: fill;
   width: 300px;
   height: 170px;
+  border-radius: 5px 5px 0 0;
 }
 
 .footer {
@@ -74,13 +75,50 @@
   margin-bottom: 0.5rem;
 }
 
+.icon-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.icon-circle:before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: -2px;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.icon-circle:hover:before {
+  border-color: rgb(255, 0, 0);
+}
+
+.right:before {
+  left: 75%;
+}
+
 .icons {
-  font-size: 20px;
-  margin-right: 0.5rem;
+  font-size: 12px;
+  margin-right: 1rem;
 }
 
 .description > span {
   margin-right: 0.75rem;
+  font-size: 14px;
+}
+
+.description span:first-child {
+  color: rgb(0, 163, 0);
+  font-weight: bold;
+}
+
+.genre > span {
+  margin-right: 0.75rem;
+  font-size: 14px;
 }
 
 .slick-prev:before,
