@@ -36,7 +36,7 @@ const genres = {
     name: "Documentary",
   },
   878: {
-    name: "Science Fiction",
+    name: "Scifi",
   },
   9648: {
     name: "Mystery",
@@ -54,7 +54,7 @@ const genres = {
     name: "War",
   },
   10759: {
-    name: "Action & Adventure",
+    name: "Adventure",
   },
   10762: {
     name: "Kids",
@@ -66,7 +66,7 @@ const genres = {
     name: "Reality",
   },
   10765: {
-    name: "Sci-Fi & Fantasy",
+    name: "Fantasy",
   },
   10766: {
     name: "Soap",
@@ -75,7 +75,7 @@ const genres = {
     name: "Talk",
   },
   10768: {
-    name: "War & Politics",
+    name: "War",
   },
   10770: {
     name: "TV Movie",

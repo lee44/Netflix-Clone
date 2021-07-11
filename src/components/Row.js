@@ -8,21 +8,17 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/Row.css";
-import {
-  FaPlay,
-  FaPlus,
-  FaThumbsUp,
-  FaThumbsDown,
-  FaChevronDown,
-} from "react-icons/fa";
+import MovieExplorer from "./MovieExplorer";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
-  const [movieExplorer, setMovieExplorer] = useState(false);
-  const containerRef = useRef(null);
-  const imageRef = useRef(null);
+  const [movieExplorer, setMovieExplorer] = useState({
+    show: false,
+    movie: null,
+    event: null,
+  });
   const movies = useSelector(selectorMovie);
   const moviesStatus = useSelector(selectorStatus);
 
@@ -58,18 +54,10 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
     }
   };
 
-  const handleMovieExplorer = (e, state, movie) => {
-    if (state) {
-      setMovieExplorer(state);
-      const cardRect = e.target.getBoundingClientRect();
-      const explorerContainer = containerRef.current;
-      const imageContainer = imageRef.current;
-
-      explorerContainer.style.left = `${cardRect.left - 35}px`;
-      imageContainer.src = base_url + movie.backdrop_path;
-    } else {
-      setMovieExplorer(false);
-    }
+  const handleMovieExplorer = (e, show, movie) => {
+    setMovieExplorer({ show: show, movie: movie, event: e });
+    // const cardRect = e.target.getBoundingClientRect();
+    // explorerContainer.style.left = `${cardRect.left - 35}px`;
   };
 
   let content;
@@ -115,58 +103,14 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
           content
         )}
         {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
-        <div
-          className={`${
-            movieExplorer ? "show explorer-container" : " explorer-container"
-          }`}
-          ref={containerRef}
-          onMouseLeave={(e) => {
-            handleMovieExplorer(e, false);
-          }}
-        >
-          <img className="cardExplorer" src="" alt="" ref={imageRef} />
-          <div className="footer">
-            <div className="button-container">
-              <div className="icon-container">
-                <span className="icon-circle">
-                  <FaPlay className="icons"></FaPlay>
-                </span>
-              </div>
-              <div className="icon-container">
-                <span className="icon-circle">
-                  <FaPlus className="icons"></FaPlus>
-                </span>
-              </div>
-              <div className="icon-container">
-                <span className="icon-circle">
-                  <FaThumbsUp className="icons"></FaThumbsUp>
-                </span>
-              </div>
-              <div className="icon-container">
-                <span className="icon-circle">
-                  <FaThumbsDown className="icons"></FaThumbsDown>
-                </span>
-              </div>
-              <div
-                className="icon-container"
-                style={{ flexGrow: "1", textAlign: "end" }}
-              >
-                <span className="icon-circle right">
-                  <FaChevronDown className="icons"></FaChevronDown>
-                </span>
-              </div>
-            </div>
-            <div className="description">
-              <span>98% Match</span>
-              <span>TV-14</span>
-              <span>5 Seasons</span>
-              <span>HD</span>
-            </div>
-            <div className="genre">
-              <span>Horror</span>
-            </div>
-          </div>
-        </div>
+        {movieExplorer["show"] ? (
+          <MovieExplorer
+            movieExplorer={movieExplorer}
+            setMovieExplorer={setMovieExplorer}
+          ></MovieExplorer>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
