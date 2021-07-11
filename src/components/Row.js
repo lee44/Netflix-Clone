@@ -8,14 +8,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/Row.css";
-import styled from "styled-components";
 import {
   FaPlay,
   FaPlus,
   FaThumbsUp,
   FaThumbsDown,
   FaChevronDown,
-  FaGrinTongueWink,
 } from "react-icons/fa";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
