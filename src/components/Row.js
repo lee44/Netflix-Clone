@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies } from "../redux/movieSlice";
 import YouTube from "react-youtube";
@@ -56,8 +56,6 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
 
   const handleMovieExplorer = (e, show, movie) => {
     setMovieExplorer({ show: show, movie: movie, event: e });
-    // const cardRect = e.target.getBoundingClientRect();
-    // explorerContainer.style.left = `${cardRect.left - 35}px`;
   };
 
   let content;

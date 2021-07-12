@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../css/Nav.css";
 import logo from "../logo.png";
+import { Link } from "react-router-dom";
 
 function Nav() {
   const [navbarBlack, setNavbarBlack] = useState(false);
@@ -45,53 +46,55 @@ function Nav() {
     <nav className={`${navbarBlack && "nav_black"}`}>
       <div className="nav_container">
         <div className="nav_menu">
-          <img className="nav_logo" src={logo} alt="netflix_logo" />
+          <Link to="/">
+            <img className="nav_logo" src={logo} alt="netflix_logo" />
+          </Link>
           <ul>
             <li>
-              <a
+              <Link
+                to="/"
                 style={{ fontWeight: "bold" }}
-                href="/#"
                 onClick={handleClicked}
                 ref={(el) => (navbarRef.current["home"] = el)}
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/#"
+              <Link
+                to="/tv"
                 onClick={handleClicked}
                 ref={(el) => (navbarRef.current["tv"] = el)}
               >
                 TV Shows
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/#"
+              <Link
+                to="/movies"
                 onClick={handleClicked}
                 ref={(el) => (navbarRef.current["movies"] = el)}
               >
                 Movies
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/#"
+              <Link
+                to="/new_popular"
                 onClick={handleClicked}
                 ref={(el) => (navbarRef.current["new"] = el)}
               >
                 New & Popular
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/#"
+              <Link
+                to="/list"
                 onClick={handleClicked}
                 ref={(el) => (navbarRef.current["list"] = el)}
               >
                 My List
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

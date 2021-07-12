@@ -11,6 +11,7 @@ const initialState = {
   horror: { movies: null, status: "idle" },
   romance: { movies: null, status: "idle" },
   documentary: { movies: null, status: "idle" },
+  tv_shows: { movies: null, status: "idle" },
 };
 
 export const fetchMovies = createAsyncThunk(
@@ -67,6 +68,7 @@ export const selectComedy = (state) => state.movie.comedy.movies;
 export const selectHorror = (state) => state.movie.horror.movies;
 export const selectRomance = (state) => state.movie.romance.movies;
 export const selectDocumentary = (state) => state.movie.documentary.movies;
+export const selectTVShows = (state) => state.movie.tv_shows.movies;
 
 export const selectOriginalStatus = (state) => state.movie.originals.status;
 export const selectTrendingStatus = (state) => state.movie.trending.status;
@@ -77,5 +79,6 @@ export const selectHorrorStatus = (state) => state.movie.horror.status;
 export const selectRomanceStatus = (state) => state.movie.romance.status;
 export const selectDocumentaryStatus = (state) =>
   state.movie.documentary.status;
+export const selectTVShowsStatus = (state) => state.movie.tv_shows.status;
 
 export default movieSlice.reducer;
