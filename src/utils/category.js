@@ -7,7 +7,6 @@ const category = {
   horror: "horror",
   romance: "romance",
   documentary: "documentary",
-  tv_shows: "tv shows",
 };
 
 export default category;

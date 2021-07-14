@@ -11,26 +11,27 @@ import {
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 // Nested destructuring
-const MovieExplorer = ({
-  movieExplorer: { show, movie, event },
-  setMovieExplorer,
+const Explorer = ({
+  mediaExplorer: { show, media, event },
+  setMediaExplorer,
 }) => {
   return (
     <div
+      // Try building another class opposite of show and add it to the right
       className={`${show ? "show explorer-container" : " explorer-container"}`}
       onMouseLeave={() => {
-        setMovieExplorer({ show: false, movie: null, event: null });
+        setMediaExplorer({ show: false, media: null, event: null });
       }}
       style={{ left: `${event.target.getBoundingClientRect().left - 35}px` }}
     >
       <img
         className="cardExplorer"
-        src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
-        alt={movie.name}
+        src={`${media.backdrop_path ? base_url + media.backdrop_path : ""}`}
+        alt={media.name}
       />
       <div className="footer">
         <h5 style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
-          {movie.title}
+          {media.title}
         </h5>
         <div className="button-container">
           <div className="icon-container">
@@ -68,15 +69,15 @@ const MovieExplorer = ({
         <div className="description">
           <span>{Math.floor(Math.random() * 101 - 20) + 20}%</span>
           <span>
-            {movie.release_date ? movie.release_date.substring(0, 4) : "2021"}
+            {media.release_date ? media.release_date.substring(0, 4) : "2021"}
           </span>
-          <span>{movie.vote_average}/10</span>
+          <span>{media.vote_average}/10</span>
           <span>HD</span>
         </div>
         <div className="genre">
-          {movie.genre_ids.map((genre, index) => {
+          {media.genre_ids.map((genre, index) => {
             if (index < 3)
-              return <span key={movie.id + index}>{genres[genre].name}</span>;
+              return <span key={media.id + index}>{genres[genre].name}</span>;
           })}
         </div>
       </div>
@@ -84,4 +85,4 @@ const MovieExplorer = ({
   );
 };
 
-export default MovieExplorer;
+export default Explorer;

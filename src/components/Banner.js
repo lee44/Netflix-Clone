@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import "../css/Banner.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMovies } from "../redux/movieSlice";
+import { fetchCollection } from "../redux/mediaSlice";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Banner({ category, fetchUrl, selectorMovie, selectorStatus }) {
+function Banner({ category, fetchUrl, selectorMedia, selectorStatus }) {
   const dispatch = useDispatch();
-  const movies = useSelector(selectorMovie);
+  const collection = useSelector(selectorMedia);
   const status = useSelector(selectorStatus);
 
   useEffect(() => {
-    dispatch(fetchMovies(fetchUrl));
+    dispatch(fetchCollection(fetchUrl));
   }, [dispatch, fetchUrl]);
 
   let content;
@@ -23,23 +23,23 @@ function Banner({ category, fetchUrl, selectorMovie, selectorStatus }) {
       </div>
     );
   } else if (status === "succeeded") {
-    const movie = movies[Math.floor(Math.random() * 19)];
+    const media = collection[Math.floor(Math.random() * 19)];
     content = (
       <header
         className="banner"
         style={{
           backgroundSize: "cover",
           backgroundImage: `url('${
-            movie.backdrop_path ? base_url + movie.backdrop_path : ""
+            media.backdrop_path ? base_url + media.backdrop_path : ""
           }')`,
           backgroundPosition: "top center",
         }}
       >
         <div className="banner__contents">
           <h1 className="banner__title">
-            {movie?.name || movie?.title || movie?.orginal_name}
+            {media?.name || media?.title || media?.orginal_name}
           </h1>
-          <p className="banner__description">{movie?.overview}</p>
+          <p className="banner__description">{media?.overview}</p>
           <div className="banner__buttons">
             <button className="banner__button">Play</button>
             <button className="banner__button">More Info</button>

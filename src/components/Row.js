@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMovies } from "../redux/movieSlice";
+import { fetchCollection } from "../redux/mediaSlice";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -8,22 +8,22 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/Row.css";
-import MovieExplorer from "./MovieExplorer";
+import Explorer from "./Explorer";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
-function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
+function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   const dispatch = useDispatch();
   const [trailerUrl, setTrailerUrl] = useState("");
-  const [movieExplorer, setMovieExplorer] = useState({
+  const [explorer, setExplorer] = useState({
     show: false,
-    movie: null,
+    media: null,
     event: null,
   });
-  const movies = useSelector(selectorMovie);
-  const moviesStatus = useSelector(selectorStatus);
+  const collection = useSelector(selectorMedia);
+  const status = useSelector(selectorStatus);
 
   useEffect(() => {
-    dispatch(fetchMovies(fetchUrl));
+    dispatch(fetchCollection(fetchUrl));
   }, [dispatch, fetchUrl]);
 
   const youtubeOpts = {
@@ -42,10 +42,10 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
     slidesToScroll: 6,
   };
 
-  const movieClicked = (moviename) => {
+  const mediaClicked = (medianame) => {
     if (trailerUrl) setTrailerUrl("");
     else {
-      movieTrailer(moviename)
+      movieTrailer(medianame)
         .then((url) => {
           const urlParamV = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParamV.get("v"));
@@ -54,58 +54,58 @@ function Row({ category, fetchUrl, selectorMovie, selectorStatus }) {
     }
   };
 
-  const handleMovieExplorer = (e, show, movie) => {
-    setMovieExplorer({ show: show, movie: movie, event: e });
+  const handleExplorer = (e, show, media) => {
+    setExplorer({ show: show, media: media, event: e });
   };
 
   let content;
-  if (moviesStatus === "pending") {
+  if (status === "pending") {
     content = (
       <div className="clipLoaderContainer">
         <ClipLoader color="#FF0000" loading={true} size={150} />
       </div>
     );
-  } else if (moviesStatus === "succeeded") {
-    content = movies.map((movie) => {
+  } else if (status === "succeeded") {
+    content = collection.map((media) => {
       return (
-        <div key={movie.id}>
+        <div key={media.id}>
           <img
             onClick={() =>
-              movieClicked(
-                movie.name ||
-                  movie.title ||
-                  movie.orginal_name ||
-                  movie.orignal_title
+              mediaClicked(
+                media.name ||
+                  media.title ||
+                  media.orginal_name ||
+                  media.orignal_title
               )
             }
             onMouseOver={(e) => {
-              handleMovieExplorer(e, true, movie);
+              handleExplorer(e, true, media);
             }}
             className="card"
-            src={`${movie.backdrop_path ? base_url + movie.backdrop_path : ""}`}
-            alt={movie.name}
+            src={`${media.backdrop_path ? base_url + media.backdrop_path : ""}`}
+            alt={media.name}
           />
         </div>
       );
     });
-  } else if (moviesStatus === "failed") {
+  } else if (status === "failed") {
     content = <div>Error</div>;
   }
   return (
     <div className="row">
       <h2 style={{ marginBottom: "1rem" }}>{category.toUpperCase()}</h2>
       <div className="row-container">
-        {moviesStatus === "succeeded" ? (
+        {status === "succeeded" ? (
           <Slider {...settings}>{content}</Slider>
         ) : (
           content
         )}
         {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
-        {movieExplorer["show"] ? (
-          <MovieExplorer
-            movieExplorer={movieExplorer}
-            setMovieExplorer={setMovieExplorer}
-          ></MovieExplorer>
+        {explorer["show"] ? (
+          <Explorer
+            mediaExplorer={explorer}
+            setMediaExplorer={setExplorer}
+          ></Explorer>
         ) : (
           ""
         )}
