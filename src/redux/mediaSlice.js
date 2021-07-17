@@ -108,4 +108,29 @@ export const selectRomanceStatus = (state) => state.media.romance.movies.status;
 export const selectDocumentaryStatus = (state) =>
   state.media.documentary.movies.status;
 
+//TV
+export const selectTVOriginals = (state) =>
+  state.media.originals.tv.collections;
+export const selectTVTrending = (state) => state.media.trending.tv.collections;
+export const selectTVTopRated = (state) => state.media.top_rated.tv.collections;
+export const selectTVAction = (state) => state.media.action.tv.collections;
+export const selectTVComedy = (state) => state.media.comedy.tv.collections;
+export const selectTVHorror = (state) => state.media.horror.tv.collections;
+export const selectTVRomance = (state) => state.media.romance.tv.collections;
+export const selectTVDocumentary = (state) =>
+  state.media.documentary.tv.collections;
+
+// Status
+export const selectTVOriginalStatus = (state) =>
+  state.media.originals.tv.status;
+export const selectTVTrendingStatus = (state) => state.media.trending.tv.status;
+export const selectTVTopRatedStatus = (state) =>
+  state.media.top_rated.tv.status;
+export const selectTVActionStatus = (state) => state.media.action.tv.status;
+export const selectTVComedyStatus = (state) => state.media.comedy.tv.status;
+export const selectTVHorrorStatus = (state) => state.media.horror.tv.status;
+export const selectTVRomanceStatus = (state) => state.media.romance.tv.status;
+export const selectTVDocumentaryStatus = (state) =>
+  state.media.documentary.tv.status;
+
 export default mediaSlice.reducer;

@@ -23,7 +23,10 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   const status = useSelector(selectorStatus);
 
   useEffect(() => {
-    dispatch(fetchCollection(fetchUrl));
+    if (!collection) {
+      console.log("Fetching");
+      dispatch(fetchCollection(fetchUrl));
+    }
   }, [dispatch, fetchUrl]);
 
   const youtubeOpts = {

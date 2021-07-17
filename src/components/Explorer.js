@@ -31,7 +31,7 @@ const Explorer = ({
       />
       <div className="footer">
         <h5 style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
-          {media.title}
+          {media.title || media.name}
         </h5>
         <div className="button-container">
           <div className="icon-container">
@@ -69,7 +69,9 @@ const Explorer = ({
         <div className="description">
           <span>{Math.floor(Math.random() * 101 - 20) + 20}%</span>
           <span>
-            {media.release_date ? media.release_date.substring(0, 4) : "2021"}
+            {media.release_date
+              ? media.release_date.substring(0, 4)
+              : media.first_air_date.substring(0, 4)}
           </span>
           <span>{media.vote_average}/10</span>
           <span>HD</span>

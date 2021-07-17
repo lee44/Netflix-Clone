@@ -15,7 +15,7 @@ const requests = {
   },
   action: {
     movies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
-    tv: `/discover/tv?api_key=${API_KEY}&with_genres=28`,
+    tv: `/discover/tv?api_key=${API_KEY}&with_genres=10759`,
   },
   comedy: {
     movies: `/discover/movie?api_key=${API_KEY}&with_genres=35`,
@@ -23,11 +23,11 @@ const requests = {
   },
   horror: {
     movies: `/discover/movie?api_key=${API_KEY}&with_genres=27`,
-    tv: `/discover/tv?api_key=${API_KEY}&with_genres=27`,
+    tv: `/discover/tv?api_key=${API_KEY}&with_genres=9648`,
   },
   romance: {
     movies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
-    tv: `/discover/tv?api_key=${API_KEY}&with_genres=27`,
+    tv: `/discover/tv?api_key=${API_KEY}&with_genres=18`,
   },
   documentary: {
     movies: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
