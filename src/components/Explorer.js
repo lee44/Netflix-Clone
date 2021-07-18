@@ -1,4 +1,5 @@
 import React from "react";
+import movieTrailer from "movie-trailer";
 import "../css/MovieExplorer.css";
 import genres from "../utils/genres";
 import {
@@ -14,7 +15,17 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 const Explorer = ({
   mediaExplorer: { show, media, event },
   setMediaExplorer,
+  setTrailerUrl,
 }) => {
+  const mediaClicked = (medianame) => {
+    movieTrailer(medianame)
+      .then((url) => {
+        const urlParamV = new URLSearchParams(new URL(url).search);
+        setTrailerUrl(urlParamV.get("v"));
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       // Try building another class opposite of show and add it to the right
@@ -34,7 +45,12 @@ const Explorer = ({
           {media.title || media.name}
         </h5>
         <div className="button-container">
-          <div className="icon-container">
+          <div
+            className="icon-container"
+            onClick={() => {
+              mediaClicked(media.name || media.title || media.original_name);
+            }}
+          >
             <span className="icon-circle">
               <FaPlay className="icons"></FaPlay>
             </span>

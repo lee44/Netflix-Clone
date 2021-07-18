@@ -21,7 +21,7 @@ function TV() {
   return (
     <div>
       <Row
-        category={category.trending}
+        category={category.trending.tv}
         fetchUrl={requests.trending.tv}
         selectorMedia={selectTVTrending}
         selectorStatus={selectTVTrendingStatus}

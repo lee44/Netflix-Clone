@@ -1,41 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCollection } from "../redux/mediaSlice";
-import YouTube from "react-youtube";
-import movieTrailer from "movie-trailer";
+import Explorer from "./Explorer";
+import Trailer from "./Trailer";
 import ClipLoader from "react-spinners/ClipLoader";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/Row.css";
-import Explorer from "./Explorer";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   const dispatch = useDispatch();
+  const collection = useSelector(selectorMedia);
+  const status = useSelector(selectorStatus);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [explorer, setExplorer] = useState({
     show: false,
     media: null,
     event: null,
   });
-  const collection = useSelector(selectorMedia);
-  const status = useSelector(selectorStatus);
-
-  useEffect(() => {
-    if (!collection) {
-      console.log("Fetching");
-      dispatch(fetchCollection(fetchUrl));
-    }
-  }, [dispatch, fetchUrl]);
-
-  const youtubeOpts = {
-    height: "390",
-    width: "100%",
-    playerVars: {
-      autoplay: 1,
-    },
-  };
 
   const settings = {
     dots: true,
@@ -45,17 +29,11 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
     slidesToScroll: 6,
   };
 
-  const mediaClicked = (medianame) => {
-    if (trailerUrl) setTrailerUrl("");
-    else {
-      movieTrailer(medianame)
-        .then((url) => {
-          const urlParamV = new URLSearchParams(new URL(url).search);
-          setTrailerUrl(urlParamV.get("v"));
-        })
-        .catch((err) => console.log(err));
+  useEffect(() => {
+    if (!collection) {
+      dispatch(fetchCollection(fetchUrl));
     }
-  };
+  }, [dispatch, fetchUrl]);
 
   const handleExplorer = (e, show, media) => {
     setExplorer({ show: show, media: media, event: e });
@@ -73,14 +51,6 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
       return (
         <div key={media.id}>
           <img
-            onClick={() =>
-              mediaClicked(
-                media.name ||
-                  media.title ||
-                  media.orginal_name ||
-                  media.orignal_title
-              )
-            }
             onMouseOver={(e) => {
               handleExplorer(e, true, media);
             }}
@@ -94,6 +64,7 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   } else if (status === "failed") {
     content = <div>Error</div>;
   }
+
   return (
     <div className="row">
       <h2 style={{ marginBottom: "1rem" }}>{category.toUpperCase()}</h2>
@@ -103,11 +74,12 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
         ) : (
           content
         )}
-        {trailerUrl && <YouTube videoId={trailerUrl} opts={youtubeOpts} />}
+        <Trailer trailerUrl={trailerUrl} setTrailerUrl={setTrailerUrl} />
         {explorer["show"] ? (
           <Explorer
             mediaExplorer={explorer}
             setMediaExplorer={setExplorer}
+            setTrailerUrl={setTrailerUrl}
           ></Explorer>
         ) : (
           ""
