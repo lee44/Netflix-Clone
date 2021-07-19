@@ -4,37 +4,37 @@ import requests from "../utils/requests";
 
 const initialState = {
   originals: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
   },
   trending: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
-    all: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
+    all: { collections: [], status: "idle" },
   },
   top_rated: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
   },
   action: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
   },
   comedy: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
   },
   horror: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
   },
   romance: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
   },
   documentary: {
-    movies: { collections: null, status: "idle" },
-    tv: { collections: null, status: "idle" },
+    movies: { collections: [], status: "idle" },
+    tv: { collections: [], status: "idle" },
   },
 };
 

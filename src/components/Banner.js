@@ -12,12 +12,12 @@ function Banner({ category, fetchUrl, selectorMedia, selectorStatus }) {
   const status = useSelector(selectorStatus);
 
   useEffect(() => {
-    if (status == "idle") {
+    if (status === "idle") {
       fetchUrl.forEach((url) => {
         dispatch(fetchCollection(url));
       });
     }
-  }, [dispatch, fetchUrl]);
+  }, [dispatch, fetchUrl, status]);
 
   let content;
   if (status === "pending") {

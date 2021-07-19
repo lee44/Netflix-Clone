@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCollection } from "../redux/mediaSlice";
 import Explorer from "./Explorer";
@@ -14,6 +14,10 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   const dispatch = useDispatch();
   const collection = useSelector(selectorMedia);
+  const shuffledCollection = useMemo(
+    () => shuffleArray([...collection]),
+    [collection]
+  );
   const status = useSelector(selectorStatus);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [explorer, setExplorer] = useState({
@@ -31,10 +35,10 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   };
 
   useEffect(() => {
-    if (status == "idle") {
+    if (status === "idle") {
       dispatch(fetchCollection(fetchUrl));
     }
-  }, [dispatch, fetchUrl]);
+  }, [dispatch, fetchUrl, status]);
 
   const handleExplorer = (e, show, media) => {
     setExplorer({ show: show, media: media, event: e });
@@ -48,7 +52,6 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
       </div>
     );
   } else if (status === "succeeded") {
-    const shuffledCollection = shuffleArray([...collection]);
     content = shuffledCollection.map((media) => {
       return (
         <div key={media.id}>
