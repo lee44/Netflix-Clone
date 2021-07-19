@@ -17,15 +17,9 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/tv">
-            <TV />
-          </Route>
-          <Route path="/movies">
-            <Movie />
-          </Route>
-          <Route path="/new_popular">
-            <NewPopular />
-          </Route>
+          <Route path="/tv">{/* <TV /> */}</Route>
+          <Route path="/movies">{/* <Movie /> */}</Route>
+          <Route path="/new_popular">{/* <NewPopular /> */}</Route>
         </Switch>
       </Router>
     </div>

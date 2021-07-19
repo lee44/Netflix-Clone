@@ -48,7 +48,8 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
       </div>
     );
   } else if (status === "succeeded") {
-    content = collection.map((media) => {
+    const shuffledCollection = shuffleArray([...collection]);
+    content = shuffledCollection.map((media) => {
       return (
         <div key={media.id}>
           <img
