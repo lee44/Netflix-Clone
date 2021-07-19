@@ -1,6 +1,6 @@
 import React from "react";
 import movieTrailer from "movie-trailer";
-import "../css/MovieExplorer.css";
+import "../css/Explorer.css";
 import genres from "../utils/genres";
 import {
   FaPlay,

@@ -1,15 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/App.css";
-import requests from "./utils/requests";
-import category from "./utils/category";
 import Login from "./components/Login";
 import Nav from "./components/Nav";
-import Banner from "./components/Banner";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./components/Home";
 import Movie from "./components/Movie";
 import TV from "./components/TV";
 import NewPopular from "./components/NewPopular";
-import { selectOriginals, selectOriginalStatus } from "./redux/mediaSlice";
 
 function App() {
   return (
@@ -18,12 +15,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
-            <Banner
-              category={category.originals}
-              fetchUrl={requests.originals.movies}
-              selectorMedia={selectOriginals}
-              selectorStatus={selectOriginalStatus}
-            />
+            <Home />
           </Route>
           <Route path="/tv">
             <TV />

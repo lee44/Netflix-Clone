@@ -10,6 +10,7 @@ const initialState = {
   trending: {
     movies: { collections: null, status: "idle" },
     tv: { collections: null, status: "idle" },
+    all: { collections: null, status: "idle" },
   },
   top_rated: {
     movies: { collections: null, status: "idle" },
@@ -132,5 +133,12 @@ export const selectTVHorrorStatus = (state) => state.media.horror.tv.status;
 export const selectTVRomanceStatus = (state) => state.media.romance.tv.status;
 export const selectTVDocumentaryStatus = (state) =>
   state.media.documentary.tv.status;
+
+// All
+export const selectAllTrending = (state) =>
+  state.media.trending.all.collections;
+
+export const selectAllTrendingStatus = (state) =>
+  state.media.trending.all.status;
 
 export default mediaSlice.reducer;

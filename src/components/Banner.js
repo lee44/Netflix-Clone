@@ -12,7 +12,11 @@ function Banner({ category, fetchUrl, selectorMedia, selectorStatus }) {
   const status = useSelector(selectorStatus);
 
   useEffect(() => {
-    dispatch(fetchCollection(fetchUrl));
+    if (status == "idle") {
+      fetchUrl.forEach((url) => {
+        dispatch(fetchCollection(url));
+      });
+    }
   }, [dispatch, fetchUrl]);
 
   let content;

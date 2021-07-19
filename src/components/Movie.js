@@ -3,13 +3,11 @@ import Row from "./Row";
 import requests from "../utils/requests";
 import category from "../utils/category";
 import {
-  selectTrending,
   selectAction,
   selectComedy,
   selectHorror,
   selectRomance,
   selectDocumentary,
-  selectTrendingStatus,
   selectActionStatus,
   selectComedyStatus,
   selectHorrorStatus,

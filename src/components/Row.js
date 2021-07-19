@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCollection } from "../redux/mediaSlice";
 import Explorer from "./Explorer";
 import Trailer from "./Trailer";
+import shuffleArray from "../utils/shuffleArray";
 import ClipLoader from "react-spinners/ClipLoader";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -30,7 +31,7 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   };
 
   useEffect(() => {
-    if (!collection) {
+    if (status == "idle") {
       dispatch(fetchCollection(fetchUrl));
     }
   }, [dispatch, fetchUrl]);

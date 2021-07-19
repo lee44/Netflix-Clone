@@ -1,5 +1,6 @@
 const API_KEY = "b68d2154a7bfc8057efc05238ad11578";
 
+// Must match initial state of mediaSlice
 const requests = {
   originals: {
     movies: `/discover/movie?api_key=${API_KEY}&with_networks=213`,
@@ -8,6 +9,7 @@ const requests = {
   trending: {
     movies: `trending/movie/day?api_key=${API_KEY}&language=en-US`,
     tv: `trending/tv/day?api_key=${API_KEY}&language=en-US`,
+    all: `trending/all/day?api_key=${API_KEY}&language=en-US`,
   },
   top_rated: {
     movies: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
