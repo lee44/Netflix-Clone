@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { BsSearch } from "react-icons/bs";
+import { IconContext } from "react-icons";
 import "../css/Nav.css";
 import logo from "../logo.png";
 import { Link } from "react-router-dom";
 
 function Nav() {
   const [navbarBlack, setNavbarBlack] = useState(false);
+  const [inputOpen, setInputOpen] = useState(false);
   const navbarRef = useRef({});
+  const searchRef = useRef();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -40,6 +44,10 @@ function Nav() {
         navbarRef.current["new"].style = "font-weight:bold";
         break;
     }
+  };
+
+  const openInput = (e) => {
+    setInputOpen(!inputOpen);
   };
 
   return (
@@ -98,7 +106,23 @@ function Nav() {
             </li>
           </ul>
         </div>
-        <div>
+        <div className="nav_menu">
+          <IconContext.Provider
+            value={{
+              color: "white",
+              size: "1.25rem",
+              className: "search-icon",
+            }}
+          >
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Enter a title..."
+                className={`${inputOpen ? "open_input" : "close_input"}`}
+              />
+              <BsSearch onClick={openInput}></BsSearch>
+            </div>
+          </IconContext.Provider>
           <img
             className="nav_avatar"
             src="https://pbs.twimg.com/profile_images/1240119990411550720/hBEe3tdn_400x400.png"
