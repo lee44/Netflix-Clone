@@ -29,26 +29,26 @@ const Explorer = ({
   return (
     <div
       // Try building another class opposite of show and add it to the right
-      className={`${show ? "show explorer-container" : " explorer-container"}`}
+      className={" explorer-container"}
       onMouseLeave={() => {
-        setMediaExplorer({ show: false, media: null, event: null });
+        setMediaExplorer({ show: false, media: media, event: event });
       }}
-      style={{ left: `${event.target.getBoundingClientRect().left - 35}px` }}
+      style={{ left: `${event?.target.getBoundingClientRect().left - 35}px` }}
     >
       <img
         className="cardExplorer"
-        src={`${media.backdrop_path ? base_url + media.backdrop_path : ""}`}
-        alt={media.name}
+        src={`${media?.backdrop_path ? base_url + media?.backdrop_path : ""}`}
+        alt={media?.name}
       />
       <div className="footer">
         <h5 style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
-          {media.title || media.name}
+          {media?.title || media?.name}
         </h5>
         <div className="button-container">
           <div
             className="icon-container"
             onClick={() => {
-              mediaClicked(media.name || media.title || media.original_name);
+              mediaClicked(media?.name || media?.title || media?.original_name);
             }}
           >
             <span className="icon-circle">
@@ -85,17 +85,17 @@ const Explorer = ({
         <div className="description">
           <span>{Math.floor(Math.random() * 101 - 20) + 20}%</span>
           <span>
-            {media.release_date
-              ? media.release_date.substring(0, 4)
-              : media.first_air_date.substring(0, 4)}
+            {media?.release_date
+              ? media?.release_date.substring(0, 4)
+              : media?.first_air_date.substring(0, 4)}
           </span>
-          <span>{media.vote_average}/10</span>
+          <span>{media?.vote_average}/10</span>
           <span>HD</span>
         </div>
         <div className="genre">
-          {media.genre_ids.map((genre, index) => {
+          {media?.genre_ids.map((genre, index) => {
             if (index < 3)
-              return <span key={media.id + index}>{genres[genre].name}</span>;
+              return <span key={media?.id + index}>{genres[genre].name}</span>;
           })}
         </div>
       </div>

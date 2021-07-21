@@ -80,15 +80,11 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
           content
         )}
         <Trailer trailerUrl={trailerUrl} setTrailerUrl={setTrailerUrl} />
-        {explorer["show"] ? (
-          <Explorer
-            mediaExplorer={explorer}
-            setMediaExplorer={setExplorer}
-            setTrailerUrl={setTrailerUrl}
-          ></Explorer>
-        ) : (
-          ""
-        )}
+        <Explorer
+          mediaExplorer={explorer}
+          setMediaExplorer={setExplorer}
+          setTrailerUrl={setTrailerUrl}
+        ></Explorer>
       </div>
     </div>
   );
