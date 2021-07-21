@@ -8,15 +8,14 @@
   top: 0;
   opacity: 0;
   border-radius: 5px;
-  transform: scale(1, 1);
-  transition: all 450ms;
+  transition: all 350ms;
   background-color: #1f1f1f;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 99;
 }
 
 .explorer-container:hover {
-  transform: scale(1.25, 1.25);
+  transform: scale(1.25);
   opacity: 1;
 }
 

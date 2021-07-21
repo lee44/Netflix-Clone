@@ -29,9 +29,11 @@ const Explorer = ({
   return (
     <div
       // Try building another class opposite of show and add it to the right
-      className={" explorer-container"}
+      className={"explorer-container"}
       onMouseLeave={() => {
-        setMediaExplorer({ show: false, media: media, event: event });
+        setTimeout(() => {
+          setMediaExplorer({ show: false, media: media, event: event });
+        }, 100);
       }}
       style={{ left: `${event?.target.getBoundingClientRect().left - 35}px` }}
     >

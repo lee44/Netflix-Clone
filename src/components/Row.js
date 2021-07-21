@@ -41,7 +41,9 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
   }, [dispatch, fetchUrl, status]);
 
   const handleExplorer = (e, show, media) => {
-    setExplorer({ show: show, media: media, event: e });
+    setTimeout(() => {
+      setExplorer({ show: show, media: media, event: e });
+    }, 100);
   };
 
   let content;
@@ -80,11 +82,13 @@ function Row({ category, fetchUrl, selectorMedia, selectorStatus }) {
           content
         )}
         <Trailer trailerUrl={trailerUrl} setTrailerUrl={setTrailerUrl} />
-        <Explorer
-          mediaExplorer={explorer}
-          setMediaExplorer={setExplorer}
-          setTrailerUrl={setTrailerUrl}
-        ></Explorer>
+        {explorer.show && (
+          <Explorer
+            mediaExplorer={explorer}
+            setMediaExplorer={setExplorer}
+            setTrailerUrl={setTrailerUrl}
+          ></Explorer>
+        )}
       </div>
     </div>
   );
