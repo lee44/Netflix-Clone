@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Movie from "./components/Movie";
 import TV from "./components/TV";
 import NewPopular from "./components/NewPopular";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/new_popular">
             <NewPopular />
+          </Route>
+          <Route path="/search">
+            <Search />
           </Route>
         </Switch>
       </Router>

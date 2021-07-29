@@ -3,13 +3,14 @@ import { BsSearch } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import "../css/Nav.css";
 import logo from "../logo.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Nav() {
   const [navbarBlack, setNavbarBlack] = useState(false);
   const [inputOpen, setInputOpen] = useState(false);
   const navbarRef = useRef({});
   const searchRef = useRef();
+  const history = useHistory();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -116,9 +117,16 @@ function Nav() {
           >
             <div className="input-container">
               <input
+                ref={searchRef}
                 type="text"
                 placeholder="Enter a title..."
                 className={`${inputOpen ? "open_input" : "close_input"}`}
+                onClick={() => {
+                  history.push("/search");
+                }}
+                onKeyUp={() => {
+                  console.log(searchRef.current.value);
+                }}
               />
               <BsSearch onClick={openInput}></BsSearch>
             </div>
