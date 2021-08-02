@@ -3,7 +3,6 @@ const category = {
   trending: {
     movie: "trending movies",
     tv: "trending tv series",
-    all: "trending",
   },
   top_rated: {
     movie: "top rated movies",

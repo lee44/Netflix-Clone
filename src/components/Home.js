@@ -1,51 +1,58 @@
 import React from "react";
-import requests from "../utils/requests";
+import tvEndPoint from "../utils/tvEndPoint";
+import { fetchTVCollection } from "../redux/tvSlice";
+import movieEndPoint from "../utils/movieEndPoint";
+import { fetchMovieCollection } from "../redux/movieSlice";
 import category from "../utils/category";
 import Banner from "./Banner";
 import Row from "./Row";
 import {
-  selectOriginals,
+  selectMovieOriginals,
+  selectMovieTopRated,
+  selectMovieOriginalStatus,
+  selectMovieTopRatedStatus,
+} from "../redux/movieSlice";
+import {
   selectTVOriginals,
-  selectAllTrending,
-  selectTopRated,
   selectTVTopRated,
-  selectOriginalStatus,
   selectTVOriginalStatus,
-  selectAllTrendingStatus,
-  selectTopRatedStatus,
   selectTVTopRatedStatus,
-} from "../redux/mediaSlice";
+} from "../redux/tvSlice";
 
 function Home() {
   return (
     <div>
       <Banner
-        category={category.originals}
-        fetchUrl={[requests.originals.movies]}
-        selectorMedia={selectOriginals}
-        selectorStatus={selectOriginalStatus}
-      />
-      <Row
-        category={category.trending.all}
-        fetchUrl={requests.trending.all}
-        selectorMedia={selectAllTrending}
-        selectorStatus={selectAllTrendingStatus}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.originals}
+        selectorMedia={selectMovieOriginals}
+        selectorStatus={selectMovieOriginalStatus}
       />
       <Row
         category={category.originals}
-        fetchUrl={requests.originals.tv}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.originals}
+        selectorMedia={selectMovieOriginals}
+        selectorStatus={selectMovieOriginalStatus}
+      />
+      <Row
+        category={category.originals}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.originals}
         selectorMedia={selectTVOriginals}
         selectorStatus={selectTVOriginalStatus}
       />
       <Row
         category={category.top_rated.movie}
-        fetchUrl={requests.top_rated.movies}
-        selectorMedia={selectTopRated}
-        selectorStatus={selectTopRatedStatus}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.top_rated}
+        selectorMedia={selectMovieTopRated}
+        selectorStatus={selectMovieTopRatedStatus}
       />
       <Row
         category={category.top_rated.tv}
-        fetchUrl={requests.top_rated.tv}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.top_rated}
         selectorMedia={selectTVTopRated}
         selectorStatus={selectTVTopRatedStatus}
       />

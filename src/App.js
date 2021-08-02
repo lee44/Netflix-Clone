@@ -27,9 +27,7 @@ function App() {
           <Route path="/new_popular">
             <NewPopular />
           </Route>
-          <Route path="/search">
-            <Search />
-          </Route>
+          <Route path="/search"></Route>
         </Switch>
       </Router>
     </div>

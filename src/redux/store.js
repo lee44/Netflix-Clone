@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mediaReducer from "../redux/mediaSlice";
+import movieReducer from "./movieSlice";
+import tvReducer from "./tvSlice";
 
 export default configureStore({
   reducer: {
-    media: mediaReducer,
+    tv: tvReducer,
+    movie: movieReducer,
   },
 });

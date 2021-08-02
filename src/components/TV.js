@@ -1,6 +1,7 @@
 import React from "react";
 import Row from "./Row";
-import requests from "../utils/requests";
+import tvEndPoint from "../utils/tvEndPoint";
+import { fetchTVCollection } from "../redux/tvSlice";
 import category from "../utils/category";
 import {
   selectTVTrending,
@@ -15,44 +16,50 @@ import {
   selectTVHorrorStatus,
   selectTVRomanceStatus,
   selectTVDocumentaryStatus,
-} from "../redux/mediaSlice";
+} from "../redux/tvSlice";
 
 function TV() {
   return (
     <div>
       <Row
         category={category.trending.tv}
-        fetchUrl={requests.trending.tv}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.trending}
         selectorMedia={selectTVTrending}
         selectorStatus={selectTVTrendingStatus}
       />
       <Row
         category={category.action}
-        fetchUrl={requests.action.tv}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.action}
         selectorMedia={selectTVAction}
         selectorStatus={selectTVActionStatus}
       />
       <Row
         category={category.comedy}
-        fetchUrl={requests.comedy.tv}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.comedy}
         selectorMedia={selectTVComedy}
         selectorStatus={selectTVComedyStatus}
       />
       <Row
         category={category.horror}
-        fetchUrl={requests.horror.tv}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.horror}
         selectorMedia={selectTVHorror}
         selectorStatus={selectTVHorrorStatus}
       />
       <Row
         category={category.romance}
-        fetchUrl={requests.romance.tv}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.romance}
         selectorMedia={selectTVRomance}
         selectorStatus={selectTVRomanceStatus}
       />
       <Row
         category={category.documentary}
-        fetchUrl={requests.documentary.tv}
+        fetchCollection={fetchTVCollection}
+        fetchUrl={tvEndPoint.documentary}
         selectorMedia={selectTVDocumentary}
         selectorStatus={selectTVDocumentaryStatus}
       />

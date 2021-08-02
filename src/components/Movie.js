@@ -1,52 +1,58 @@
 import React from "react";
 import Row from "./Row";
-import requests from "../utils/requests";
+import movieEndPoint from "../utils/movieEndPoint";
+import { fetchMovieCollection } from "../redux/movieSlice";
 import category from "../utils/category";
 import {
-  selectAction,
-  selectComedy,
-  selectHorror,
-  selectRomance,
-  selectDocumentary,
-  selectActionStatus,
-  selectComedyStatus,
-  selectHorrorStatus,
-  selectRomanceStatus,
-  selectDocumentaryStatus,
-} from "../redux/mediaSlice";
+  selectMovieAction,
+  selectMovieComedy,
+  selectMovieHorror,
+  selectMovieRomance,
+  selectMovieDocumentary,
+  selectMovieActionStatus,
+  selectMovieComedyStatus,
+  selectMovieHorrorStatus,
+  selectMovieRomanceStatus,
+  selectMovieDocumentaryStatus,
+} from "../redux/movieSlice";
 
 function Movie() {
   return (
     <div>
       <Row
         category={category.action}
-        fetchUrl={requests.action.movies}
-        selectorMedia={selectAction}
-        selectorStatus={selectActionStatus}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.action}
+        selectorMedia={selectMovieAction}
+        selectorStatus={selectMovieActionStatus}
       />
       <Row
         category={category.comedy}
-        fetchUrl={requests.comedy.movies}
-        selectorMedia={selectComedy}
-        selectorStatus={selectComedyStatus}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.comedy}
+        selectorMedia={selectMovieComedy}
+        selectorStatus={selectMovieComedyStatus}
       />
       <Row
         category={category.horror}
-        fetchUrl={requests.horror.movies}
-        selectorMedia={selectHorror}
-        selectorStatus={selectHorrorStatus}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.horror}
+        selectorMedia={selectMovieHorror}
+        selectorStatus={selectMovieHorrorStatus}
       />
       <Row
         category={category.romance}
-        fetchUrl={requests.romance.movies}
-        selectorMedia={selectRomance}
-        selectorStatus={selectRomanceStatus}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.romance}
+        selectorMedia={selectMovieRomance}
+        selectorStatus={selectMovieRomanceStatus}
       />
       <Row
         category={category.documentary}
-        fetchUrl={requests.documentary.movies}
-        selectorMedia={selectDocumentary}
-        selectorStatus={selectDocumentaryStatus}
+        fetchCollection={fetchMovieCollection}
+        fetchUrl={movieEndPoint.documentary}
+        selectorMedia={selectMovieDocumentary}
+        selectorStatus={selectMovieDocumentaryStatus}
       />
     </div>
   );
