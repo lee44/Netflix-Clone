@@ -1,6 +1,7 @@
 import React from "react";
 import movieTrailer from "movie-trailer";
 import "../css/Explorer.css";
+import logo from "../logo.png";
 import genres from "../utils/genres";
 import { FaPlay, FaPlus, FaThumbsUp, FaThumbsDown, FaChevronDown } from "react-icons/fa";
 
@@ -32,7 +33,7 @@ const Explorer = ({
     >
       <img
         className="cardExplorer"
-        src={`${media?.backdrop_path ? base_url + media?.backdrop_path : ""}`}
+        src={`${media?.backdrop_path ? base_url + media?.backdrop_path : logo}`}
         alt={media?.name}
       />
       <div className="footer">
@@ -81,8 +82,8 @@ const Explorer = ({
           <span>{Math.floor(Math.random() * 101 - 20) + 20}%</span>
           <span>
             {media?.release_date
-              ? media?.release_date.substring(0, 4)
-              : media?.first_air_date.substring(0, 4)}
+              ? media?.release_date?.substring(0, 4)
+              : media?.first_air_date?.substring(0, 4)}
           </span>
           <span>{media?.vote_average}/10</span>
           <span>HD</span>

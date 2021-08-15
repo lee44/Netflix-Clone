@@ -1,5 +1,6 @@
 import React from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import logo from "../logo.png";
 
 function contentLoader(status, setExplorer, shuffledCollection) {
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -26,7 +27,7 @@ function contentLoader(status, setExplorer, shuffledCollection) {
               handleExplorer(e, true, media);
             }}
             className="card"
-            src={`${media.backdrop_path ? base_url + media.backdrop_path : ""}`}
+            src={`${media.backdrop_path ? base_url + media.backdrop_path : logo}`}
             alt={media.name}
           />
         </div>
