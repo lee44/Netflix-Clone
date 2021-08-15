@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../css/Banner.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Banner({ fetchCollection, fetchUrl, selectorMedia, selectorStatus }) {
-  const dispatch = useDispatch();
+function Banner({ selectorMedia, selectorStatus }) {
   const collection = useSelector(selectorMedia);
   const status = useSelector(selectorStatus);
-
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchCollection(fetchUrl));
-    }
-  }, [dispatch, fetchCollection, fetchUrl, status]);
 
   let content;
   if (status === "pending") {

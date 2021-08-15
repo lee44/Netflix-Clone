@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/App.css";
 import Login from "./components/Login";
@@ -27,7 +27,9 @@ function App() {
           <Route path="/new_popular">
             <NewPopular />
           </Route>
-          <Route path="/search"></Route>
+          <Route path="/search">
+            <Search />
+          </Route>
         </Switch>
       </Router>
     </div>

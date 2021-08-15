@@ -23,7 +23,7 @@ function Row({ category, fetchCollection, fetchUrl, selectorMedia, selectorStatu
   });
 
   useEffect(() => {
-    if (status === "idle") {
+    if (status === "idle" && fetchUrl) {
       dispatch(fetchCollection(fetchUrl));
     }
   }, [dispatch, fetchCollection, fetchUrl, status]);

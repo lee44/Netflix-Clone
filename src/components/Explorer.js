@@ -2,13 +2,7 @@ import React from "react";
 import movieTrailer from "movie-trailer";
 import "../css/Explorer.css";
 import genres from "../utils/genres";
-import {
-  FaPlay,
-  FaPlus,
-  FaThumbsUp,
-  FaThumbsDown,
-  FaChevronDown,
-} from "react-icons/fa";
+import { FaPlay, FaPlus, FaThumbsUp, FaThumbsDown, FaChevronDown } from "react-icons/fa";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 // Nested destructuring
@@ -28,7 +22,6 @@ const Explorer = ({
 
   return (
     <div
-      // Try building another class opposite of show and add it to the right
       className={"explorer-container"}
       onMouseLeave={() => {
         setTimeout(() => {

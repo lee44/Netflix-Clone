@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { searchCollection } from "../redux/searchSlice";
 import { BsSearch } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import "../css/Nav.css";
@@ -6,6 +8,7 @@ import logo from "../logo.png";
 import { Link, useHistory } from "react-router-dom";
 
 function Nav() {
+  const dispatch = useDispatch();
   const [navbarBlack, setNavbarBlack] = useState(false);
   const [inputOpen, setInputOpen] = useState(false);
   const navbarRef = useRef({});
@@ -124,8 +127,9 @@ function Nav() {
                 onClick={() => {
                   history.push("/search");
                 }}
-                onKeyUp={() => {
-                  console.log(searchRef.current.value);
+                onKeyUp={(e) => {
+                  // console.log(e.target.value);
+                  dispatch(searchCollection(e.target.value));
                 }}
               />
               <BsSearch onClick={openInput}></BsSearch>

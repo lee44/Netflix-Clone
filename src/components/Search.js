@@ -1,12 +1,17 @@
+import "../css/Search.css";
 import React from "react";
-
-import Result from "./Result";
+import { selectSearch, selectSearchStatus } from "../redux/searchSlice";
+import Row from "./Row";
 
 function Search() {
   return (
-    <div>
-      <Result />
-    </div>
+    <>
+      <Row
+        category={"Results"}
+        selectorMedia={selectSearch}
+        selectorStatus={selectSearchStatus}
+      />
+    </>
   );
 }
 
