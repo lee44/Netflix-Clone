@@ -1,4 +1,3 @@
-import "../css/Search.css";
 import React from "react";
 import { selectSearch, selectSearchStatus } from "../redux/searchSlice";
 import Row from "./Row";
