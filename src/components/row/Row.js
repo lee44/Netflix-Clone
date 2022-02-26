@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import settings from '../../utils/settings';
+import settings from '../../config/settings';
 import shuffleArray from '../../utils/shuffleArray';
 import contentLoader from '../content_loader/contentLoader';
 import Explorer from '../explorer/Explorer';

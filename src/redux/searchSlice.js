@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import searchEndPoint from '../api/searchEndPoint';
 import axios from '../utils/axios';
-import searchEndPoint from '../utils/searchEndPoint';
 
 const initialState = {
 	collections: [],

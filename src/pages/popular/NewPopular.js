@@ -1,10 +1,10 @@
 import React from 'react';
+import movieEndPoint from '../../api/movieEndPoint';
+import tvEndPoint from '../../api/tvEndPoint';
 import Row from '../../components/row/Row';
 import { fetchMovieCollection, selectMovieTrending, selectMovieTrendingStatus } from '../../redux/movieSlice';
 import { fetchTVCollection, selectTVTrending, selectTVTrendingStatus } from '../../redux/tvSlice';
 import category from '../../utils/category';
-import movieEndPoint from '../../utils/movieEndPoint';
-import tvEndPoint from '../../utils/tvEndPoint';
 
 function NewPopular() {
 	return (

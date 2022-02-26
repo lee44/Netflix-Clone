@@ -1,4 +1,5 @@
 import React from 'react';
+import tvEndPoint from '../../api/tvEndPoint';
 import Row from '../../components/row/Row';
 import {
 	fetchTVCollection,
@@ -16,7 +17,6 @@ import {
 	selectTVTrendingStatus,
 } from '../../redux/tvSlice';
 import category from '../../utils/category';
-import tvEndPoint from '../../utils/tvEndPoint';
 
 function TV() {
 	return (

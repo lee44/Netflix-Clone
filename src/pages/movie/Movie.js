@@ -1,4 +1,5 @@
 import React from 'react';
+import movieEndPoint from '../../api/movieEndPoint';
 import Row from '../../components/row/Row';
 import {
 	fetchMovieCollection,
@@ -14,7 +15,6 @@ import {
 	selectMovieRomanceStatus,
 } from '../../redux/movieSlice';
 import category from '../../utils/category';
-import movieEndPoint from '../../utils/movieEndPoint';
 
 function Movie() {
 	return (

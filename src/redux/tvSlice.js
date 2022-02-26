@@ -1,70 +1,70 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../utils/axios";
-import tvEndPoint from "../utils/tvEndPoint";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import tvEndPoint from '../api/tvEndPoint';
+import axios from '../utils/axios';
 
 const initialState = {
-  originals: {
-    collections: [],
-    status: "idle",
-  },
-  trending: {
-    collections: [],
-    status: "idle",
-  },
-  top_rated: {
-    collections: [],
-    status: "idle",
-  },
-  action: {
-    collections: [],
-    status: "idle",
-  },
-  comedy: {
-    collections: [],
-    status: "idle",
-  },
-  horror: {
-    collections: [],
-    status: "idle",
-  },
-  romance: {
-    collections: [],
-    status: "idle",
-  },
-  documentary: {
-    collections: [],
-    status: "idle",
-  },
+	originals: {
+		collections: [],
+		status: 'idle',
+	},
+	trending: {
+		collections: [],
+		status: 'idle',
+	},
+	top_rated: {
+		collections: [],
+		status: 'idle',
+	},
+	action: {
+		collections: [],
+		status: 'idle',
+	},
+	comedy: {
+		collections: [],
+		status: 'idle',
+	},
+	horror: {
+		collections: [],
+		status: 'idle',
+	},
+	romance: {
+		collections: [],
+		status: 'idle',
+	},
+	documentary: {
+		collections: [],
+		status: 'idle',
+	},
 };
 
-export const fetchTVCollection = createAsyncThunk(
-  "tv/fetchCollection",
-  async (fetchUrl) => {
-    const response = await axios.get(fetchUrl);
-    return response.data.results;
-  }
-);
+export const fetchTVCollection = createAsyncThunk('tv/fetchCollection', async (fetchUrl) => {
+	// @ts-ignore
+	const response = await axios.get(fetchUrl);
+	return response.data.results;
+});
 
 const tvSlice = createSlice({
-  name: "tv",
-  initialState,
-  extraReducers: {
-    [fetchTVCollection.pending]: (state, action) => {
-      for (const category in tvEndPoint)
-        if (tvEndPoint[category] === action.meta.arg) state[category].status = "pending";
-    },
-    [fetchTVCollection.fulfilled]: (state, action) => {
-      for (const category in tvEndPoint)
-        if (tvEndPoint[category] === action.meta.arg) {
-          state[category].status = "succeeded";
-          state[category].collections = action.payload;
-        }
-    },
-    [fetchTVCollection.rejected]: (state, action) => {
-      for (const category in tvEndPoint)
-        if (tvEndPoint[category] === action.meta.arg) state[category].status = "pending";
-    },
-  },
+	name: 'tv',
+	initialState,
+	extraReducers: {
+		// @ts-ignore
+		[fetchTVCollection.pending]: (state, action) => {
+			for (const category in tvEndPoint) if (tvEndPoint[category] === action.meta.arg) state[category].status = 'pending';
+		},
+		// @ts-ignore
+		[fetchTVCollection.fulfilled]: (state, action) => {
+			for (const category in tvEndPoint)
+				if (tvEndPoint[category] === action.meta.arg) {
+					state[category].status = 'succeeded';
+					state[category].collections = action.payload;
+				}
+		},
+		// @ts-ignore
+		[fetchTVCollection.rejected]: (state, action) => {
+			for (const category in tvEndPoint) if (tvEndPoint[category] === action.meta.arg) state[category].status = 'pending';
+		},
+	},
+	reducers: undefined,
 });
 
 export const selectTVOriginals = (state) => state.tv.originals.collections;

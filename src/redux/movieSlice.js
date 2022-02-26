@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import movieEndPoint from '../api/movieEndPoint';
 import axios from '../utils/axios';
-import movieEndPoint from '../utils/movieEndPoint';
 
 const initialState = {
 	originals: {
