@@ -1,35 +1,36 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../utils/axios";
-import searchEndPoint from "../utils/searchEndPoint";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from '../utils/axios';
+import searchEndPoint from '../utils/searchEndPoint';
 
 const initialState = {
-  collections: [],
-  status: "idle",
+	collections: [],
+	status: 'idle',
 };
 
-export const searchCollection = createAsyncThunk(
-  "media/searchCollection",
-  async (query) => {
-    const response = await axios.get(`${searchEndPoint}&query=${query}`);
-    return response.data.results;
-  }
-);
+export const searchCollection = createAsyncThunk('media/searchCollection', async (query) => {
+	const response = await axios.get(`${searchEndPoint}&query=${query}`);
+	return response.data.results;
+});
 
 const searchSlice = createSlice({
-  name: "search",
-  initialState,
-  extraReducers: {
-    [searchCollection.pending]: (state, action) => {
-      state.status = "pending";
-    },
-    [searchCollection.fulfilled]: (state, action) => {
-      state.status = "succeeded";
-      state.collections = action.payload;
-    },
-    [searchCollection.rejected]: (state, action) => {
-      state.status = "failed";
-    },
-  },
+	name: 'search',
+	initialState,
+	extraReducers: {
+		// @ts-ignore
+		[searchCollection.pending]: (state, action) => {
+			state.status = 'pending';
+		},
+		// @ts-ignore
+		[searchCollection.fulfilled]: (state, action) => {
+			state.status = 'succeeded';
+			state.collections = action.payload;
+		},
+		// @ts-ignore
+		[searchCollection.rejected]: (state, action) => {
+			state.status = 'failed';
+		},
+	},
+	reducers: undefined,
 });
 
 export const selectSearch = (state) => state.search.collections;

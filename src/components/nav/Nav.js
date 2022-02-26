@@ -1,13 +1,12 @@
-// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import logo from '../assets/logo.png';
-import avatar from '../assets/netflix_avatar.png';
-import '../css/Nav.css';
-import { searchCollection } from '../redux/searchSlice';
+import logo from '../../assets/logo.png';
+import avatar from '../../assets/netflix_avatar.png';
+import { searchCollection } from '../../redux/searchSlice';
+import './Nav.css';
 
 function Nav() {
 	const dispatch = useDispatch();
@@ -24,6 +23,7 @@ function Nav() {
 			} else setNavbarBlack(false);
 		});
 		return () => {
+			// @ts-ignore
 			window.removeEventListener('scroll');
 		};
 	}, []);
@@ -52,6 +52,7 @@ function Nav() {
 		}
 	};
 
+	// @ts-ignore
 	const openInput = (e) => {
 		setInputOpen(!inputOpen);
 	};
@@ -109,7 +110,7 @@ function Nav() {
 									history.push('/search');
 								}}
 								onKeyUp={(e) => {
-									// console.log(e.target.value);
+									// @ts-ignore
 									dispatch(searchCollection(e.target.value));
 								}}
 							/>

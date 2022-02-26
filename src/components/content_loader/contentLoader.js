@@ -1,6 +1,6 @@
 import React from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 
 function contentLoader(status, setExplorer, shuffledCollection) {
 	const base_url = 'https://image.tmdb.org/t/p/original/';

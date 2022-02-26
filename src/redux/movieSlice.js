@@ -1,72 +1,70 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../utils/axios";
-import movieEndPoint from "../utils/movieEndPoint";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from '../utils/axios';
+import movieEndPoint from '../utils/movieEndPoint';
 
 const initialState = {
-  originals: {
-    collections: [],
-    status: "idle",
-  },
-  trending: {
-    collections: [],
-    status: "idle",
-  },
-  top_rated: {
-    collections: [],
-    status: "idle",
-  },
-  action: {
-    collections: [],
-    status: "idle",
-  },
-  comedy: {
-    collections: [],
-    status: "idle",
-  },
-  horror: {
-    collections: [],
-    status: "idle",
-  },
-  romance: {
-    collections: [],
-    status: "idle",
-  },
-  documentary: {
-    collections: [],
-    status: "idle",
-  },
+	originals: {
+		collections: [],
+		status: 'idle',
+	},
+	trending: {
+		collections: [],
+		status: 'idle',
+	},
+	top_rated: {
+		collections: [],
+		status: 'idle',
+	},
+	action: {
+		collections: [],
+		status: 'idle',
+	},
+	comedy: {
+		collections: [],
+		status: 'idle',
+	},
+	horror: {
+		collections: [],
+		status: 'idle',
+	},
+	romance: {
+		collections: [],
+		status: 'idle',
+	},
+	documentary: {
+		collections: [],
+		status: 'idle',
+	},
 };
 
-export const fetchMovieCollection = createAsyncThunk(
-  "movie/fetchCollection",
-  async (fetchUrl) => {
-    const response = await axios.get(fetchUrl);
-    return response.data.results;
-  }
-);
+export const fetchMovieCollection = createAsyncThunk('movie/fetchCollection', async (fetchUrl) => {
+	// @ts-ignore
+	const response = await axios.get(fetchUrl);
+	return response.data.results;
+});
 
+// @ts-ignore
 const movieSlice = createSlice({
-  name: "movie",
-  initialState,
-  extraReducers: {
-    [fetchMovieCollection.pending]: (state, action) => {
-      for (const category in movieEndPoint)
-        if (movieEndPoint[category] === action.meta.arg)
-          state[category].status = "pending";
-    },
-    [fetchMovieCollection.fulfilled]: (state, action) => {
-      for (const category in movieEndPoint)
-        if (movieEndPoint[category] === action.meta.arg) {
-          state[category].status = "succeeded";
-          state[category].collections = action.payload;
-        }
-    },
-    [fetchMovieCollection.rejected]: (state, action) => {
-      for (const category in movieEndPoint)
-        if (movieEndPoint[category] === action.meta.arg)
-          state[category].status = "failed";
-    },
-  },
+	name: 'movie',
+	initialState,
+	extraReducers: {
+		// @ts-ignore
+		[fetchMovieCollection.pending]: (state, action) => {
+			for (const category in movieEndPoint) if (movieEndPoint[category] === action.meta.arg) state[category].status = 'pending';
+		},
+		// @ts-ignore
+		[fetchMovieCollection.fulfilled]: (state, action) => {
+			for (const category in movieEndPoint)
+				if (movieEndPoint[category] === action.meta.arg) {
+					state[category].status = 'succeeded';
+					state[category].collections = action.payload;
+				}
+		},
+		// @ts-ignore
+		[fetchMovieCollection.rejected]: (state, action) => {
+			for (const category in movieEndPoint) if (movieEndPoint[category] === action.meta.arg) state[category].status = 'failed';
+		},
+	},
 });
 
 export const selectMovieOriginals = (state) => state.movie.originals.collections;

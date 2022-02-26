@@ -1,9 +1,9 @@
 import movieTrailer from 'movie-trailer';
 import React from 'react';
 import { FaChevronDown, FaPlay, FaPlus, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
-import logo from '../assets/logo.png';
-import '../css/Explorer.css';
-import genres from '../utils/genres';
+import logo from '../../assets/logo.png';
+import genres from '../../utils/genres';
+import './Explorer.css';
 
 const base_url = 'https://image.tmdb.org/t/p/original/';
 // Nested destructuring

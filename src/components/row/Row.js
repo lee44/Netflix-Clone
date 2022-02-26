@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import '../css/Row.css';
-import settings from '../utils/settings';
-import shuffleArray from '../utils/shuffleArray';
-import contentLoader from './contentLoader';
-import Explorer from './Explorer';
-import Trailer from './Trailer';
+import settings from '../../utils/settings';
+import shuffleArray from '../../utils/shuffleArray';
+import contentLoader from '../content_loader/contentLoader';
+import Explorer from '../explorer/Explorer';
+import Trailer from '../trailer/Trailer';
+import './Row.css';
 
 function Row({ category, fetchCollection, fetchUrl, selectorMedia, selectorStatus }) {
 	const dispatch = useDispatch();
 	const collection = useSelector(selectorMedia);
+	// @ts-ignore
 	const shuffledCollection = useMemo(() => shuffleArray([...collection]), [collection]);
 	const status = useSelector(selectorStatus);
 	const [trailerUrl, setTrailerUrl] = useState('');
